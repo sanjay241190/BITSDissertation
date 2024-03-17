@@ -13,6 +13,8 @@ jobs:
       -  run: echo "${{ secrets.SALESFORCE_SERVER_KEY }}" > server.key
         
       -  name: 'Salesforce Org Authentication' 
-         run: sf org login jwt --clientid=${{ secrets.SALESFORCE_CONSUMER_KEY }} --username=${{ secrets.SALESFORCE_USERNAME }} --jwtkeyfile=server.key --instanceurl https://login.salesforce.com
+         run:  |
+         source ~/.bashrc
+         sf org login jwt --clientid=${{ secrets.SALESFORCE_CONSUMER_KEY }} --username=${{ secrets.SALESFORCE_USERNAME }} --jwtkeyfile=server.key --instanceurl https://login.salesforce.com
      
      
