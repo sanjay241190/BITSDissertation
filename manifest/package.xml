@@ -11,7 +11,7 @@
     </types>  
     <types>
         <members>ContactBeforeUpdateTrigger</members>
-        <name>Apexrigger</name>
+        <name>ApexTrigger</name>
     </types>   
     <version>59.0</version>
 </Package>
