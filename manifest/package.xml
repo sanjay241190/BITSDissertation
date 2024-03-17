@@ -5,11 +5,7 @@
         <members>AccountUtility</members>
         <name>ApexClass</name>
     </types>    
-    <types>
-        <members>The_Blue_Soul</members>
-        <name>CustomSite</name>
-    </types>  
-    <types>
+     <types>
         <members>ContactBeforeUpdateTrigger</members>
         <name>ApexTrigger</name>
     </types>   
