@@ -1,6 +1,8 @@
 on:
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
+      - staging
     types:
       - closed
 jobs:
@@ -12,8 +14,26 @@ jobs:
       -  run: npm install sfdx-cli -g
       -  run: echo "${{ secrets.SALESFORCE_SERVER_KEY }}" > server.key
         
-      -  name: 'Salesforce Org Authentication' 
+      -  name: 'Salesforce Prod Environment Authentication' 
+         if: github.event_name == 'pull_request' && github.base_ref == 'main'
          run:  sfdx force:auth:jwt:grant --clientid=${{ secrets.SALESFORCE_CONSUMER_KEY }} --jwtkeyfile=server.key --username=${{ secrets.SALESFORCE_USERNAME }} --setdefaultdevhubusername
      
-      -  name: 'Salesforce Org Metadata Validation' 
+      -  name: 'Salesforce Org Metadata Validation for Production' 
+         if: github.event_name == 'pull_request' && github.base_ref == 'main'
          run:  sfdx force:source:deploy -x manifest/package.xml --checkonly -u ${{ secrets.SALESFORCE_USERNAME }}
+
+      -  name: 'Salesforce Prod Metadata Deployment' 
+         if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true && github.base_ref == 'main'
+         run:  sfdx force:source:deploy -x manifest/package.xml -u ${{ secrets.SALESFORCE_USERNAME }}
+
+      -  name: 'Salesforce Staging Environment Authentication' 
+         if: github.event_name == 'pull_request' && github.base_ref == 'main'
+         run:  sfdx force:auth:jwt:grant --clientid=${{ secrets.SALESFORCE_CONSUMER_KEY }} --jwtkeyfile=server.key --username=${{ secrets.SALESFORCE_USERNAME }} --setdefaultdevhubusername
+     
+      -  name: 'Salesforce Org Metadata Validation for Staging' 
+         if: github.event_name == 'pull_request' && github.base_ref == 'staging'
+         run:  sfdx force:source:deploy -x manifest/package.xml --checkonly -u ${{ secrets.SALESFORCE_USERNAME }}
+
+      -  name: 'Salesforce Org Metadata Deployment to Staging' 
+         if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true && github.base_ref == 'staging'
+         run:  sfdx force:source:deploy -x manifest/package.xml -u ${{ secrets.SALESFORCE_USERNAME }}
