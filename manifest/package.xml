@@ -2,7 +2,16 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
         <members>AccountController</members>
+        <members>AccountUtility</members>
         <name>ApexClass</name>
     </types>    
+    <types>
+        <members>The_Blue_Soul</members>
+        <name>CustomSite</name>
+    </types>  
+    <types>
+        <members>ContactBeforeUpdateTrigger</members>
+        <name>CustomTrigger</name>
+    </types>   
     <version>59.0</version>
 </Package>
