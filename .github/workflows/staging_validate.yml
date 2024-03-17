@@ -2,8 +2,7 @@ on:
   pull_request:
     branches:
       - staging
-    types:
-      - closed
+          
 jobs:
   build:
     runs-on: ubuntu-latest
