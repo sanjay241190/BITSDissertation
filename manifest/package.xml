@@ -4,5 +4,9 @@
         <members>AccountController</members>
         <name>ApexClass</name>
     </types>    
+    <types>
+        <members>*</members>
+        <name>CustomLabel</name>
+    </types
     <version>59.0</version>
 </Package>
