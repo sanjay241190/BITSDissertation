@@ -26,7 +26,7 @@ jobs:
          run:  sfdx force:source:deploy -x manifest/package.xml --checkonly -u ${{ secrets.SALESFORCE_USERNAME_STAGE }}
 
       -  name: 'Salesforce Org Metadata Deployment to Staging' 
-         if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true 
+         if: github.event_name == 'pull_request' && github.event.pull_request.merged == true 
          run:  sfdx force:source:deploy -x manifest/package.xml -u ${{ secrets.SALESFORCE_USERNAME_STAGE }}
 
       
