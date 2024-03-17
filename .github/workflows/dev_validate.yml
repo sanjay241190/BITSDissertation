@@ -14,9 +14,7 @@ jobs:
       -  run: echo "${{ secrets.SALESFORCE_SERVER_KEY }}" > server.key
         
       -  name: 'Salesforce Dev Environment Authentication' 
-         if: github.event_name == 'pull_request' && github.base_ref == 'dev'
          run:  sfdx force:auth:jwt:grant --clientid=${{ secrets.SALESFORCE_CONSUMER_KEY }} --jwtkeyfile=server.key --username=${{ secrets.SALESFORCE_USERNAME }} --setdefaultdevhubusername
      
       -  name: 'Salesforce Dev Environment Metadata Validation' 
-         if: github.event_name == 'pull_request' && github.base_ref == 'dev'
          run:  sfdx force:source:deploy -x manifest/package.xml --checkonly -u ${{ secrets.SALESFORCE_USERNAME }}
