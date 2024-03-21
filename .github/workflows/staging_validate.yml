@@ -2,12 +2,8 @@ on:
   pull_request:
     branches:
       - staging
-<<<<<<< HEAD:.github/workflows/staging.yml
     types:
       - closed
-=======
-          
->>>>>>> staging:.github/workflows/staging_validate.yml
 jobs:
   build:
     runs-on: ubuntu-latest
