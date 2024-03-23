@@ -1,5 +1,5 @@
-public with sharing class AccountController {
-    
+public without sharing class AccountController {
+    //Comment
     @AuraEnabled(cacheable=true)
     public static List<Account> getAccountList() {
         return [SELECT Id, Name FROM Account LIMIT 10];
